@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended"],
+    "rules": {
+        // Add your rules here
+    },
+    "root": true,
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
+    "ignorePatterns": ["tests/"] // Add the path you want to exclude
+}
