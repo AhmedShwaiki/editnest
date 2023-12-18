@@ -1,16 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "extends": ["eslint:recommended"],
-    "rules": {
-        // Add your rules here
-    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:svelte/recommended"
+    ],
+    "rules": {},
     "root": true,
     "parserOptions": {
-        "ecmaVersion": 2017,
-        "sourceType": "module"
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "tsconfigRootDir": "./tsconfig.json",
+        "extraFileExtensions": [".svelte"] // This is a required setting in `@typescript-eslint/parser` v4.24.0
     },
-    "ignorePatterns": ["tests/"] // Add the path you want to exclude
+    "overrides": [
+        {
+            "files": ["*.svelte"],
+            "parser": "svelte-eslint-parser",
+            // Parse the `<script>` in `.svelte` as TypeScript by adding the following configuration.
+            "parserOptions": {
+                "parser": "@typescript-eslint/parser"
+            }
+        }
+    ],
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "plugins": ["@typescript-eslint"],
+    "ignorePatterns": ["tests/", "node_modules/"] // Add the path you want to exclude
 }
