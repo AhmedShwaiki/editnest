@@ -1,0 +1,10 @@
+node_modules
+public
+.vscode
+.husky
+.github
+package-lock.json
+package.json
+
+logs
+*.log
