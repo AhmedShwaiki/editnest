@@ -13,6 +13,9 @@
     "test:coverage": " npm test --coverage.enabled  --coverage.include=src",
     "prepare": "husky install"
   },
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
+  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@tsconfig/svelte": "^5.0.2",

@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: 20.10.0
 
+
+      - name: Remove Dependencies
+        run: rm -rf package-lock.json
+
       - name: Install Dependencies
         run: npm install
 
