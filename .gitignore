@@ -26,3 +26,7 @@ dist-ssr
 # tests
 .coverage
 coverage
+
+# npm
+package-lock.json
+yarn-lock.json
