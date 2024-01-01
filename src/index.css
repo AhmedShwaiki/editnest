@@ -1,0 +1,172 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../public/fonts/Roboto-Medium.woff2') format('woff2');
+}
+
+@keyframes colorTransition {
+    from {
+        background-color: var(--background-light);
+        color: var(--text-light);
+    }
+    to {
+        background-color: var(--background-dark);
+        color: var(--text-dark);
+    }
+}
+
+@keyframes blurFocus {
+    from {
+        filter: blur(0);
+    }
+    to {
+        filter: blur(5px);
+    }
+}
+
+@keyframes scaleAnimation {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/**
+* ~ Global Variables ~
+*
+*/
+:root {
+    /* Colors */
+    /* Light Mode Colors */
+    --background-light: #f8f8f8;
+    --text-light: #333333;
+    --accent-light: #3498db;
+    --border-light: #dadada;
+    --error-light: #e74c3c;
+    --warning-light: #f39c12;
+    --info-light: #27ae60;
+    /* Dark Mode Colors */
+    --background-dark: #1e1e1e;
+    --text-dark: #ffffff;
+    --accent-dark: #3498db;
+    --border-dark: #333333;
+    --error-dark: #ff6347;
+    --warning-dark: #ffa500;
+    --info-dark: #2ecc71;
+
+    /* Fonts */
+    /* Font family */
+    --main-font: 'Roboto', Arial, sans-serif;
+    /* Font sizes */
+    --default-font-size: 16px;
+    --header-font-size: 28px;
+    --subheader-font-size: 20px;
+    /* Line height */
+    --default-line-height: 1.5;
+    --header-line-height: 1.2;
+    /* Letter spacing */
+    --default-letter-spacing: normal;
+    --header-letter-spacing: 1px;
+    /* Font weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+
+    /* Animation */
+    --animation-duration: 0.3s;
+}
+
+/**
+* ~ General Resets ~
+*
+*/
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    border: none;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+* {
+    font-family: var(--main-font);
+}
+
+html,
+body {
+    font-size: var(--default-font-size);
+    line-height: var(--default-line-height);
+    color: var(--text-light);
+    background-color: var(--background-light);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior: none; /* Prevent scroll chaining */
+    vertical-align: baseline;
+    animation: colorTransition var(--animation-duration) ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--font-weight-medium);
+}
+
+h1 {
+    font-size: var(--header-font-size);
+    line-height: var(--header-line-height);
+    letter-spacing: var(--header-letter-spacing);
+}
+
+h2 {
+    font-size: var(--subheader-font-size);
+}
+
+p {
+    letter-spacing: var(--default-letter-spacing);
+}
+
+ol,
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+body.dark-mode {
+    color: var(--text-dark);
+    background-color: var(--background-dark);
+    border-color: var(--border-dark);
+    animation: colorTransition var(--animation-duration) ease-in-out;
+}
+
+.error-message {
+    color: var(--error-light);
+    background-color: var(--error-dark);
+}
+
+.warning-message {
+    color: var(--warning-light);
+    background-color: var(--warning-dark);
+}
+
+.info-message {
+    color: var(--info-light);
+    background-color: var(--info-dark);
+}
+
+.input-field {
+    animation: blurFocus var(--animation-duration) ease-in-out;
+}
+
+.button {
+    animation: scaleAnimation var(--animation-duration) ease-in-out;
+}
