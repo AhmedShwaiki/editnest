@@ -28,5 +28,5 @@
         "browser": true
     },
     "plugins": ["@typescript-eslint"],
-    "ignorePatterns": ["tests/", "node_modules/"] // Add the path you want to exclude
+    "ignorePatterns": ["**.test.js", "node_modules/"] // Add the path you want to exclude
 }

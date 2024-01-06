@@ -1,9 +1,7 @@
-import { beforeEach } from 'vitest'
-import { expect, describe, test } from 'vitest'
 import Stack from './stack'
 
 describe('Stack', () => {
-    let mockStack: Stack<number> 
+    let mockStack
 
     beforeEach(() => {
         mockStack = new Stack()

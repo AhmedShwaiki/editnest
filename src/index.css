@@ -1,17 +1,6 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('../public/fonts/Roboto-Medium.woff2') format('woff2');
-}
-
-@keyframes colorTransition {
-    from {
-        background-color: var(--background-light);
-        color: var(--text-light);
-    }
-    to {
-        background-color: var(--background-dark);
-        color: var(--text-dark);
-    }
+    src: url('fonts/Roboto-Medium.woff2') format('woff2');
 }
 
 @keyframes blurFocus {
@@ -42,7 +31,6 @@
     --background-light: #f8f8f8;
     --text-light: #333333;
     --accent-light: #3498db;
-    --border-light: #dadada;
     --error-light: #e74c3c;
     --warning-light: #f39c12;
     --info-light: #27ae60;
@@ -50,30 +38,28 @@
     --background-dark: #1e1e1e;
     --text-dark: #ffffff;
     --accent-dark: #3498db;
-    --border-dark: #333333;
     --error-dark: #ff6347;
     --warning-dark: #ffa500;
     --info-dark: #2ecc71;
 
     /* Fonts */
-    /* Font family */
     --main-font: 'Roboto', Arial, sans-serif;
-    /* Font sizes */
-    --default-font-size: 16px;
-    --header-font-size: 28px;
-    --subheader-font-size: 20px;
-    /* Line height */
+    --default-font-size: 1rem;
+    --subheader-font-size: 1.25rem;
+    --header-font-size: 1.75rem;
     --default-line-height: 1.5;
     --header-line-height: 1.2;
-    /* Letter spacing */
     --default-letter-spacing: normal;
     --header-letter-spacing: 1px;
-    /* Font weights */
     --font-weight-normal: 400;
     --font-weight-medium: 500;
 
     /* Animation */
     --animation-duration: 0.3s;
+
+    /* Borders */
+    --border-light: 1px solid #1e1e1e;
+    --border-dark: 1px solid #333333;
 }
 
 /**
@@ -88,6 +74,8 @@
     background-image: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
     box-shadow: none;
     padding: 0;
 }
@@ -96,20 +84,22 @@
     font-family: var(--main-font);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 html,
 body {
     font-size: var(--default-font-size);
     line-height: var(--default-line-height);
-    color: var(--text-light);
-    background-color: var(--background-light);
-
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
     overscroll-behavior: none; /* Prevent scroll chaining */
     vertical-align: baseline;
-    animation: colorTransition var(--animation-duration) ease-in-out;
 }
 
 h1,
@@ -135,17 +125,28 @@ p {
     letter-spacing: var(--default-letter-spacing);
 }
 
+menu:not(article menu),
+ol:not(article ol),
+ul:not(article ul) {
+    list-style: none;
+}
+
+menu,
 ol,
 ul {
-    list-style: none;
     padding-left: 0;
 }
 
-body.dark-mode {
-    color: var(--text-dark);
-    background-color: var(--background-dark);
-    border-color: var(--border-dark);
-    animation: colorTransition var(--animation-duration) ease-in-out;
+a {
+    /* Places underlines below the descenders */
+    text-underline-position: under;
+    /* Sets the thickness as a percentage of the font size */
+    text-decoration-thickness: 8;
+}
+
+img {
+    display: block;
+    max-width: 100%;
 }
 
 .error-message {
@@ -165,8 +166,4 @@ body.dark-mode {
 
 .input-field {
     animation: blurFocus var(--animation-duration) ease-in-out;
-}
-
-.button {
-    animation: scaleAnimation var(--animation-duration) ease-in-out;
 }
