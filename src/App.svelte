@@ -9,8 +9,6 @@
     let allowTransition = false
 
     function toggleColorScheme(enableDarkMode = false) {
-        document.body.classList.remove('color-transition')
-
         if (enableDarkMode) {
             document.body.classList.remove('light')
             document.body.classList.add('dark')
