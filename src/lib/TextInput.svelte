@@ -1,21 +1,52 @@
 <script lang="ts">
-    // Component notes:
-    // 2- why and can we just use the stack in the application for the history using a button?
-    // 3- how can we change the styles of the below to meet with the following:
-    // a- height of the containers should grow until max limit
-    // b- the user will scroll after the limit is overflow
-    // input and text area must have state isFocused
+    import { onMount } from 'svelte'
 
     export let inputPlaceholder: string = 'Title'
     export let textAreaPlaceholder: string = 'Write something'
-    let isInputFocused = false
-    let ref: HTMLTextAreaElement
+    export let maxScrollHeight: number = 500
+
+    let isCollapsed = true
+    let inputValue: string
+    let textAreaValue: string
+    let textAreaElement: HTMLTextAreaElement
+
+    onMount(() => {
+        document.addEventListener('click', handleClickOutside)
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    })
+
+    const handleClickOutside = (event: MouseEvent) => {
+        const container = document.querySelector('.container')
+        if (!container?.contains(event.target as Node)) {
+            isCollapsed = true
+        }
+    }
+
+    const handleAutoSizeTextArea = () => {
+        if (textAreaElement?.scrollHeight < maxScrollHeight /* max scroll height*/) {
+            textAreaElement.style.height = '0px'
+            textAreaElement.style.height = textAreaElement.scrollHeight + 'px'
+        }
+    }
+
+    $: textAreaValue, textAreaElement, handleAutoSizeTextArea()
 </script>
 
 <div class="container">
-    <input type="text" placeholder={inputPlaceholder} on:focus={() => (isInputFocused = true)} />
-    {#if isInputFocused}
-        <textarea bind:this={ref} placeholder={textAreaPlaceholder} />
+    <input
+        bind:value={inputValue}
+        type="text"
+        placeholder={inputPlaceholder}
+        on:click={() => (isCollapsed = false)}
+    />
+    {#if !isCollapsed}
+        <textarea
+            bind:this={textAreaElement}
+            placeholder={textAreaPlaceholder}
+            bind:value={textAreaValue}
+        />
     {/if}
 </div>
 
@@ -23,7 +54,6 @@
     .container {
         display: flex;
         flex-direction: column;
-        min-height: 70px;
         min-width: 600px;
         margin: 24px;
         border-radius: 4px;
@@ -38,16 +68,6 @@
         border: var(--border-light);
     }
 
-    :global(body.light),
-    :global(body.dark) * {
-        transition: background-color var(--animation-duration) ease-in-out;
-    }
-
-    :global(body.light) textarea {
-        background-color: var(--background-light);
-        color: var(--text-light);
-    }
-
     :global(body.dark) textarea {
         background-color: var(--background-dark);
         color: var(--text-dark);
@@ -58,14 +78,11 @@
         color: var(--text-dark);
     }
 
-    :global(body.light) input {
-        background-color: var(--background-light);
-        color: var(--text-light);
-    }
-
     input,
     textarea {
+        transition: background-color var(--animation-duration) ease-in-out;
         padding: 10px;
+        outline: none;
     }
 
     input {
@@ -74,10 +91,5 @@
 
     textarea {
         resize: none;
-    }
-
-    input:focus,
-    textarea:focus {
-        outline: none;
     }
 </style>
