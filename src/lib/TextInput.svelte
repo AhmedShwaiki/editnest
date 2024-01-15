@@ -4,11 +4,13 @@
     export let inputPlaceholder: string = 'Title'
     export let textAreaPlaceholder: string = 'Write something'
     export let maxScrollHeight: number = 500
+    export let onBlur: (target: { title: string; description: string }) => void
 
     let isCollapsed = true
     let inputValue: string
     let textAreaValue: string
     let textAreaElement: HTMLTextAreaElement
+    let containerRef: HTMLElement
 
     onMount(() => {
         document.addEventListener('click', handleClickOutside)
@@ -18,9 +20,14 @@
     })
 
     const handleClickOutside = (event: MouseEvent) => {
-        const container = document.querySelector('.container')
-        if (!container?.contains(event.target as Node)) {
+        if (!containerRef?.contains(event.target as Node)) {
             isCollapsed = true
+
+            if (inputValue?.trim() && textAreaValue?.trim()) {
+                onBlur({ title: inputValue, description: textAreaValue })
+            }
+            inputValue = ''
+            textAreaValue = ''
         }
     }
 
@@ -34,7 +41,7 @@
     $: textAreaValue, textAreaElement, handleAutoSizeTextArea()
 </script>
 
-<div class="container">
+<div class="container" bind:this={containerRef}>
     <input
         bind:value={inputValue}
         type="text"
@@ -76,6 +83,16 @@
     :global(body.dark) input {
         background-color: var(--background-dark);
         color: var(--text-dark);
+    }
+
+    :global(body.light) textarea {
+        background-color: var(--background-light);
+        color: var(--text-light);
+    }
+
+    :global(body.light) input {
+        background-color: var(--background-light);
+        color: var(--text-light);
     }
 
     input,

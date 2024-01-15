@@ -1,6 +1,6 @@
 <script lang="ts">
     import './index.css'
-    import CardList from './lib/CardList.svelte'
+    // import CardList from './lib/CardList.svelte'
     import TextInput from './lib/TextInput.svelte'
     import Button from './lib/Button.svelte'
 
@@ -23,6 +23,8 @@
         }
         localStorage.setItem('darkMode', isDarkMode.toString())
     }
+
+    let items: { title: string; description: string }[] = []
 </script>
 
 <header>
@@ -41,8 +43,18 @@
 
 <main>
     <div class="root">
-        <TextInput />
-        <CardList />
+        <TextInput
+            onBlur={note => {
+                items = [...items, note]
+                // push this value into the notes array above
+            }}
+        />
+        <!-- TODO: <CardList /> -->
+        <ul>
+            {#each items as item}
+                <li>{item.title} x {item.description}</li>
+            {/each}
+        </ul>
     </div>
 </main>
 
