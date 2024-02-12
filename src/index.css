@@ -3,24 +3,6 @@
     src: url('fonts/Roboto-Medium.woff2') format('woff2');
 }
 
-@keyframes blurFocus {
-    from {
-        filter: blur(0);
-    }
-    to {
-        filter: blur(5px);
-    }
-}
-
-@keyframes scaleAnimation {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.1);
-    }
-}
-
 /**
 * ~ Global Variables ~
 *
@@ -82,6 +64,7 @@
 
 * {
     font-family: var(--main-font);
+    transition: background-color var(--animation-duration) ease-in-out;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -162,8 +145,4 @@ img {
 .info-message {
     color: var(--info-light);
     background-color: var(--info-dark);
-}
-
-.input-field {
-    animation: blurFocus var(--animation-duration) ease-in-out;
 }

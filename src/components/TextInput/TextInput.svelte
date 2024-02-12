@@ -65,48 +65,35 @@
         margin: 24px;
         border-radius: 4px;
         padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        border: var(--border-light);
     }
 
     :global(body.dark) .container {
         border: var(--border-dark);
     }
 
-    :global(body.light) .container {
-        border: var(--border-light);
-    }
-
-    :global(body.dark) textarea {
-        background-color: var(--background-dark);
-        color: var(--text-dark);
-    }
-
-    :global(body.dark) input {
-        background-color: var(--background-dark);
-        color: var(--text-dark);
-    }
-
-    :global(body.light) textarea {
-        background-color: var(--background-light);
-        color: var(--text-light);
-    }
-
-    :global(body.light) input {
-        background-color: var(--background-light);
-        color: var(--text-light);
-    }
-
     input,
     textarea {
-        transition: background-color var(--animation-duration) ease-in-out;
         padding: 10px;
         outline: none;
+        border: 1px solid var(--border-light);
+        background-color: var(--background-light);
+        color: var(--text-light);
+    }
+
+    textarea {
+        resize: none;
     }
 
     input {
         font-size: var(--subheader-font-size);
     }
 
-    textarea {
-        resize: none;
+    :global(body.dark) input,
+    :global(body.dark) textarea {
+        border-color: var(--border-dark);
+        background-color: var(--background-dark);
+        color: var(--text-dark);
     }
 </style>

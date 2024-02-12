@@ -1,48 +1,32 @@
 <script lang="ts">
     import './index.css'
     // import CardList from './lib/CardList.svelte'
-    import TextInput from './lib/TextInput.svelte'
-    import Button from './lib/Button.svelte'
+    import TextInput from './components/TextInput/TextInput.svelte'
+    import Button from './components/Button/Button.svelte'
+    import useTheme from './lib/useTheme'
+    import { APP_THEMES } from './lib/constants'
 
-    let isDarkMode = JSON.parse(localStorage.getItem('darkMode') || 'false')
-    $: toggleColorScheme(isDarkMode)
-    let allowTransition = false
+    const { theme, setTheme } = useTheme([APP_THEMES.DARK, APP_THEMES.LIGHT])
 
-    function toggleColorScheme(enableDarkMode = false) {
-        if (enableDarkMode) {
-            document.body.classList.remove('light')
-            document.body.classList.add('dark')
+    const onClickToggleTheme = () => {
+        if ($theme === APP_THEMES.DARK) {
+            setTheme(APP_THEMES.LIGHT)
         } else {
-            document.body.classList.remove('dark')
-            document.body.classList.add('light')
+            setTheme(APP_THEMES.DARK)
         }
-
-        // prevent transition effect on page load
-        if (allowTransition) {
-            document.body.classList.add('color-transition')
-        }
-        localStorage.setItem('darkMode', isDarkMode.toString())
     }
 
     let items: { title: string; description: string }[] = []
 </script>
 
 <header>
-    <Button
-        onClick={() => {
-            if (!allowTransition) {
-                allowTransition = true
-            }
-
-            isDarkMode = !isDarkMode
-        }}
-    >
-        {isDarkMode ? 'Dark' : 'Light'}
+    <Button onClick={onClickToggleTheme}>
+        {$theme === APP_THEMES.DARK ? 'Dark' : 'Light'}
     </Button>
 </header>
 
 <main>
-    <div class="root">
+    <div class="container">
         <TextInput
             onBlur={note => {
                 items = [...items, note]
@@ -63,23 +47,19 @@
 </footer>
 
 <style>
-    .root {
+    .container {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    :global(.dark) {
-        background-color: var(--background-dark);
-        border-color: var(--border-dark);
-    }
-
-    :global(.light) {
+    :global(body.light) {
         background-color: var(--background-light);
         border-color: var(--border-light);
     }
 
-    :global(.color-transition) {
-        transition: background-color var(--animation-duration) ease-in-out;
+    :global(body.dark) {
+        background-color: var(--background-dark);
+        border-color: var(--border-dark);
     }
 </style>
