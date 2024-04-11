@@ -7,8 +7,8 @@
     export let onBlur: (target: { title: string; description: string }) => void
 
     let isCollapsed = true
-    let inputValue: string
-    let textAreaValue: string
+    let title: string
+    let description: string
     let textAreaElement: HTMLTextAreaElement
     let containerRef: HTMLElement
 
@@ -23,11 +23,11 @@
         if (!containerRef?.contains(event.target as Node)) {
             isCollapsed = true
 
-            if (inputValue?.trim() && textAreaValue?.trim()) {
-                onBlur({ title: inputValue, description: textAreaValue })
+            if (title.trim() && description.trim()) {
+                onBlur({ title: title, description: description })
             }
-            inputValue = ''
-            textAreaValue = ''
+            title = ''
+            description = ''
         }
     }
 
@@ -38,12 +38,12 @@
         }
     }
 
-    $: textAreaValue, textAreaElement, handleAutoSizeTextArea()
+    $: description, textAreaElement, handleAutoSizeTextArea()
 </script>
 
 <div class="container" bind:this={containerRef}>
     <input
-        bind:value={inputValue}
+        bind:value={title}
         type="text"
         placeholder={inputPlaceholder}
         on:click={() => (isCollapsed = false)}
@@ -52,7 +52,7 @@
         <textarea
             bind:this={textAreaElement}
             placeholder={textAreaPlaceholder}
-            bind:value={textAreaValue}
+            bind:value={description}
         />
     {/if}
 </div>
@@ -60,12 +60,13 @@
 <style>
     .container {
         display: flex;
+        align-self: center;
         flex-direction: column;
         min-width: 600px;
         margin: 24px;
         border-radius: 4px;
         padding: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        box-shadow: var(--classic-grey);
         border: var(--border-light);
     }
 
@@ -79,7 +80,6 @@
         outline: none;
         border: 1px solid var(--border-light);
         background-color: var(--background-light);
-        color: var(--text-light);
     }
 
     textarea {

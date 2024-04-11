@@ -9,7 +9,7 @@
 <style>
     .standard-button {
         border-radius: 4px;
-        padding: 0.5rem;
+        padding: 8px;
         cursor: pointer;
     }
 
