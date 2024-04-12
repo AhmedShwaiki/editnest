@@ -16,9 +16,6 @@
         box-shadow: var(--classic-grey);
         border-radius: 4px;
         width: 600px;
-        /* height: fit-content;
-        overflow: hidden;
-        text-wrap: break-word; */
     }
 
     :global(body.dark) .card {
