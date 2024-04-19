@@ -20,7 +20,7 @@ describe('Stack', () => {
         mockStack.push(3)
 
         expect(mockStack.size()).toBe(3)
-        expect(mockStack.top()).toBe(3)
+        expect(mockStack.peek()).toBe(3)
     })
 
     test('should pop elements from the stack', () => {
@@ -31,7 +31,7 @@ describe('Stack', () => {
         mockStack.pop()
 
         expect(mockStack.size()).toBe(2)
-        expect(mockStack.top()).toBe(2)
+        expect(mockStack.peek()).toBe(2)
     })
 
     test('should correctly check if the stack is empty', () => {
@@ -60,11 +60,11 @@ describe('Stack', () => {
         mockStack.push(1)
         mockStack.push(2)
 
-        expect(mockStack.top()).toBe(2)
+        expect(mockStack.peek()).toBe(2)
         expect(mockStack.size()).toBe(2)
     })
 
     test('should return undefined when trying to get the top of an empty stack', () => {
-        expect(mockStack.top()).toBeUndefined()
+        expect(mockStack.peek()).toBeUndefined()
     })
 })

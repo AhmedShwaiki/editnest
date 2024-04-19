@@ -56,7 +56,7 @@ class Stack<T> {
      * Returns the top element of the stack without removing it.
      * @returns {T | undefined} The top element of the stack.
      */
-    top(): T | undefined {
+    peek(): T | undefined {
         if (this._instance.length === 0) {
             return undefined;
         }
