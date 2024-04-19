@@ -3,7 +3,7 @@
     export let description: string
 </script>
 
-<div class="card">
+<div class="card" role="textbox" tabindex={0} aria-label="click to edit card with title: {title}">
     <h3>{title}</h3>
 
     <p>{description}</p>
