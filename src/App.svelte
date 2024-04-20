@@ -1,11 +1,12 @@
 <script lang="ts">
     import './index.css'
-    // import CardList from './lib/CardList.svelte'
+    import useTheme from './lib/useTheme'
+    import { APP_THEMES } from './lib/constants'
+
     import TextInput from './components/TextInput/TextInput.svelte'
     import Button from './components/Button/Button.svelte'
     import Card from './components/Card/Card.svelte'
-    import useTheme from './lib/useTheme'
-    import { APP_THEMES } from './lib/constants'
+    import EditModal from './components/EditModal/EditModal.svelte'
 
     const { theme, setTheme } = useTheme([APP_THEMES.DARK, APP_THEMES.LIGHT])
 
@@ -18,6 +19,8 @@
     }
 
     let items: { title: string; description: string }[] = []
+    let currentItem: { title: string; description: string } = { title: '', description: '' }
+    let isEditMode = false
 </script>
 
 <div class="container">
@@ -37,9 +40,24 @@
         </div>
         <div class="list-container">
             {#each items as { title, description }}
-                <Card {title} {description} />
+                <Card
+                    {title}
+                    {description}
+                    onClick={() => {
+                        isEditMode = true
+                        currentItem = { title, description }
+                    }}
+                />
             {/each}
         </div>
+        {#if isEditMode}
+            <EditModal
+                item={currentItem}
+                onClose={() => {
+                    isEditMode = false
+                }}
+            />
+        {/if}
     </main>
 
     <footer>
