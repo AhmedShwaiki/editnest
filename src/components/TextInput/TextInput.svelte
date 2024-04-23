@@ -24,7 +24,7 @@
             isCollapsed = true
 
             if (title.trim() && description.trim()) {
-                onBlur({ title: title, description: description })
+                onBlur({ title, description })
             }
             title = ''
             description = ''

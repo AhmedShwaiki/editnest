@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/svelte'
+import { fireEvent, render, screen } from '@testing-library/svelte'
+
 import Card from './Card.svelte'
-import { expect } from 'vitest'
+
+const { getByText, getByRole } = screen
 
 const renderCard = props => {
     render(Card, { ...props })
@@ -14,20 +16,26 @@ describe('Card', () => {
     it('renders card', () => {
         renderCard({
             title: 'Test Title',
-            description: 'Test description'
+            description: 'Test description',
+            onClick: vi.fn()
         })
 
-        const title = screen.getByText('Test Title')
-        const description = screen.getByText('Test description')
+        const title = getByText('Test Title')
+        const description = getByText('Test description')
+
         expect(title).toBeInTheDocument()
         expect(description).toBeInTheDocument()
     })
 
-    // it('on click calls the onClick handler', async () => {
-    //     renderButton({
-    //         title: 'Test Title',
-    //         description: 'Test description',
-    //         onClick: vi.fn();
-    //     })
-    // })
+    it('on click calls the onClick handler', async () => {
+        const onClickSpy = vi.fn()
+        renderCard({
+            title: 'Test Title',
+            description: 'Test description',
+            onClick: onClickSpy
+        })
+
+        await fireEvent.click(getByRole('textbox'))
+        expect(onClickSpy).toHaveBeenCalledTimes(1)
+    })
 })
