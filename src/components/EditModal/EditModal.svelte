@@ -1,26 +1,27 @@
 <script lang="ts">
-    import Button from './../Button/Button.svelte'
-    import throttle from '../../lib/throttle/throttle'
-    import Stack from '../../lib/stack/stack'
+    import Button from '@components/Button/Button.svelte'
+    import throttle from '@lib/throttle/throttle'
+    import Stack from '@lib/stack/stack'
+    import { type Note } from '@lib/types/note'
 
-    export let item: { title: string; description: string } = { title: '', description: '' }
-    export let onClose: () => void
+    export let note: Note = { title: '', description: '' }
+    export let onClose: (item: { title: string; description: string }) => void
 
-    let title = item.title || ''
-    let description = item.description || ''
+    let title = note.title || ''
+    let description = note.description || ''
     let pastEdits = new Stack()
     let futureEdits = new Stack()
 
     // add initial item to past edits
     pastEdits.push({ title, description })
 
-    const close = () => {
-        onClose()
-    }
-
     const handleTextChange = throttle(() => {
         pastEdits.push({ title, description })
     }, 500)
+
+    const close = () => {
+        onClose({ title, description })
+    }
 
     const undo = () => {
         if (pastEdits.size() > 1) {
@@ -53,7 +54,7 @@
     }
 </script>
 
-<div class="modal" aria-labelledby={`modal-title-${item.title}`} aria-modal="true">
+<div class="modal" aria-labelledby={`modal-title-${note.title}`} aria-modal="true">
     <div class="content">
         <textarea name="title" bind:value={title} on:input={handleTextChange} />
         <textarea name="description" bind:value={description} on:input={handleTextChange} />
