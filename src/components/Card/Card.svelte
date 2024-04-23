@@ -8,7 +8,7 @@
     class="card"
     role="textbox"
     tabindex={0}
-    aria-label="click to edit card with title: {title}"
+    aria-label="click to edit card with {title}"
     on:click={onClick}
     on:keydown={e => {
         if (e.key === 'Enter') {

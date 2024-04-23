@@ -1,12 +1,12 @@
 <script lang="ts">
     import './index.css'
-    import useTheme from './lib/theme/useTheme'
-    import { APP_THEMES } from './lib/theme/themes'
+    import useTheme from '@lib/theme/useTheme'
+    import { APP_THEMES } from '@lib/theme/themes'
 
-    import TextInput from './components/TextInput/TextInput.svelte'
-    import Button from './components/Button/Button.svelte'
-    import Card from './components/Card/Card.svelte'
-    import EditModal from './components/EditModal/EditModal.svelte'
+    import TextInput from '@components/TextInput/TextInput.svelte'
+    import Button from '@components/Button/Button.svelte'
+    import Card from '@components/Card/Card.svelte'
+    import EditModal from '@components/EditModal/EditModal.svelte'
 
     const { theme, setTheme } = useTheme([APP_THEMES.DARK, APP_THEMES.LIGHT])
 

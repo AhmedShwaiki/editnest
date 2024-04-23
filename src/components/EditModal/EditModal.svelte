@@ -28,10 +28,7 @@
             futureEdits.push({ title, description })
 
             pastEdits.pop()
-            const { title: pastTitle, description: pastDesc } = pastEdits.peek() as {
-                title: string
-                description: string
-            }
+            const { title: pastTitle, description: pastDesc } = pastEdits.peek() as Note
 
             title = pastTitle
             description = pastDesc
@@ -41,10 +38,7 @@
     const redo = () => {
         if (futureEdits.size() > 0) {
             pastEdits.push({ title, description })
-            const { title: futureTitle, description: futureDesc } = futureEdits.peek() as {
-                title: string
-                description: string
-            }
+            const { title: futureTitle, description: futureDesc } = futureEdits.peek() as Note
 
             title = futureTitle
             description = futureDesc
