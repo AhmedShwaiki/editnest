@@ -1,7 +1,7 @@
 <script lang="ts">
     import './index.css'
-    import useTheme from './lib/useTheme'
-    import { APP_THEMES } from './lib/constants'
+    import useTheme from './lib/theme/useTheme'
+    import { APP_THEMES } from './lib/theme/themes'
 
     import TextInput from './components/TextInput/TextInput.svelte'
     import Button from './components/Button/Button.svelte'
@@ -18,8 +18,8 @@
         }
     }
 
-    let items: { title: string; description: string }[] = []
-    let currentItem: { title: string; description: string } = { title: '', description: '' }
+    let notes: { title: string; description: string }[] = []
+    let currentNote: { title: string; description: string } = { title: '', description: '' }
     let isEditMode = false
 </script>
 
@@ -34,27 +34,35 @@
         <div class="input-container">
             <TextInput
                 onBlur={note => {
-                    items = [...items, note]
+                    notes = [...notes, note]
                 }}
             />
         </div>
         <div class="list-container">
-            {#each items as { title, description }}
+            {#each notes as { title, description }}
                 <Card
                     {title}
                     {description}
                     onClick={() => {
                         isEditMode = true
-                        currentItem = { title, description }
+                        currentNote = { title, description }
                     }}
                 />
             {/each}
         </div>
         {#if isEditMode}
             <EditModal
-                item={currentItem}
-                onClose={() => {
+                note={currentNote}
+                onClose={({ title, description }) => {
                     isEditMode = false
+                    // update the item with the new values
+                    notes = notes.map(note => {
+                        if (note.title === currentNote.title) {
+                            return { title, description }
+                        }
+
+                        return note
+                    })
                 }}
             />
         {/if}
