@@ -23,7 +23,7 @@ describe('useTheme', () => {
         expect(localStorage.getItem('theme')).toBe('theme2')
     })
 
-    it.only('sets the theme with given options', () => {
+    it('sets the theme with given options', () => {
         localStorage.clear()
         const onLoadTheme = vi.fn()
         const onSetTheme = vi.fn()
