@@ -36,8 +36,8 @@ export default function useTheme(
     }
 ) {
     const storedTheme = localStorage.getItem(options.localStorageKey)
-    const initialTheme = storedTheme || themes[0]
-
+    
+    const initialTheme = storedTheme || options.default
     if (options.onLoadTheme) {
         options.onLoadTheme(initialTheme)
     }
