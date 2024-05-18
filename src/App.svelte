@@ -2,6 +2,7 @@
     import './index.css'
     import useTheme from './lib/theme/useTheme'
     import { APP_THEMES } from './lib/theme/themes'
+    import { type Note } from './lib/types/note'
 
     import TextInput from './components/TextInput/TextInput.svelte'
     import Button from './components/Button/Button.svelte'
@@ -18,7 +19,7 @@
         }
     }
 
-    let notes: { title: string; description: string }[] = []
+    let notes: Note[] = []
     let currentNote: { title: string; description: string } = { title: '', description: '' }
     let isEditMode = false
 </script>
