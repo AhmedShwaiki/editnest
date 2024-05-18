@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-
     export let inputPlaceholder: string = 'Title'
     export let textAreaPlaceholder: string = 'Write something'
     export let maxScrollHeight: number = 500
@@ -10,22 +8,15 @@
     let title: string
     let description: string
     let textAreaElement: HTMLTextAreaElement
-    let containerRef: HTMLElement
 
-    onMount(() => {
-        document.addEventListener('click', handleClickOutside)
-        return () => {
-            document.removeEventListener('click', handleClickOutside)
-        }
-    })
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (!containerRef?.contains(event.target as Node)) {
+    const handleBlur = (event: FocusEvent) => {
+        if (!event.relatedTarget) {
             isCollapsed = true
 
-            if (title.trim() && description.trim()) {
+            if (title?.trim() && description?.trim()) {
                 onBlur({ title, description })
             }
+
             title = ''
             description = ''
         }
@@ -41,18 +32,20 @@
     $: description, textAreaElement, handleAutoSizeTextArea()
 </script>
 
-<div class="container" bind:this={containerRef}>
+<div class="container">
     <input
         bind:value={title}
         type="text"
         placeholder={inputPlaceholder}
         on:click={() => (isCollapsed = false)}
+        on:blur={handleBlur}
     />
     {#if !isCollapsed}
         <textarea
             bind:this={textAreaElement}
             placeholder={textAreaPlaceholder}
             bind:value={description}
+            on:blur={handleBlur}
         />
     {/if}
 </div>

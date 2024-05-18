@@ -1,8 +1,8 @@
 <script lang="ts">
-    import Button from '@components/Button/Button.svelte'
-    import throttle from '@lib/throttle/throttle'
-    import Stack from '@lib/stack/stack'
-    import { type Note } from '@lib/types/note'
+    import Button from '../Button/Button.svelte'
+    import throttle from '../../lib/throttle/throttle'
+    import Stack from '../../lib/stack/stack'
+    import { type Note } from '../../lib/types/note'
 
     export let note: Note = { title: '', description: '' }
     export let onClose: (item: { title: string; description: string }) => void
