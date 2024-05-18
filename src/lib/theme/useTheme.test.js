@@ -9,7 +9,7 @@ describe('useTheme', () => {
         localStorage.clear()
     })
 
-    it.skip('sets the theme with default options', () => {
+    it('sets the theme with default options', () => {
         localStorage.clear()
         const { setTheme } = useTheme(mockThemes)
 
@@ -23,7 +23,7 @@ describe('useTheme', () => {
         expect(localStorage.getItem('theme')).toBe('theme2')
     })
 
-    it.skip('sets the theme with given options', () => {
+    it('sets the theme with given options', () => {
         localStorage.clear()
         const onLoadTheme = vi.fn()
         const onSetTheme = vi.fn()
